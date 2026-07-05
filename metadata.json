@@ -1,0 +1,6 @@
+{
+  "name": "Lab Techwear Landing Page",
+  "description": "An avant-garde, minimalist techwear landing page with responsive layouts, fluid slide transitions, and pixel-perfect design accuracy.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
