@@ -38,6 +38,10 @@ elif [ ! -d "$SOURCE" ]; then
 fi
 
 echo "==> Syncing export from $SOURCE into $REPO_ROOT"
+# CMS-owned paths (content/, public/admin, uploads, src/cms, Investigations page)
+# are excluded so AI Studio exports never wipe CMS data or integration code.
+# NOTE: if the Investigations page is redesigned in AI Studio, that redesign is
+# intentionally NOT applied — it must be merged by hand into the CMS version.
 rsync -a --delete \
   --exclude '.git' \
   --exclude '.github' \
@@ -48,6 +52,11 @@ rsync -a --delete \
   --exclude 'dist' \
   --exclude '.env' \
   --exclude '.env.local' \
+  --exclude 'content' \
+  --exclude 'public/admin' \
+  --exclude 'public/images/uploads' \
+  --exclude 'src/cms' \
+  --exclude 'src/pages/Investigations.tsx' \
   "$SOURCE"/ "$REPO_ROOT"/
 
 cd "$REPO_ROOT"
@@ -66,6 +75,11 @@ fi
 
 echo "==> Installing dependencies"
 npm install --silent
+
+# AI Studio exports overwrite package.json without the CMS renderer deps —
+# re-ensure them (no-op when already present at a matching version)
+npm install --silent leaflet marked dompurify
+npm install --silent -D @types/leaflet
 
 echo "==> Building to verify"
 npm run build

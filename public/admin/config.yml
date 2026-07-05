@@ -1,0 +1,143 @@
+# Decap CMS configuration — Cachecrime editorial dashboard
+#
+# Auth: GitHub backend. Remote login (from any browser) requires the OAuth
+# relay set up in Phase C — until then, use LOCAL MODE on your own machine:
+#   1. cd ~/cachecrime-live
+#   2. npx decap-server          (starts the local proxy)
+#   3. npm run dev               (in another terminal)
+#   4. open http://localhost:3000/admin/  — no login needed
+#
+# publish_mode gives Drafts → In Review → Ready → Publish (a PR per draft on
+# the GitHub backend). In local mode entries publish directly.
+
+backend:
+  name: github
+  repo: Cachecrime/cachecrime.github.io
+  branch: main
+  # Phase C (uncomment once the Cloudflare Worker OAuth relay is deployed):
+  # base_url: https://YOUR-WORKER.workers.dev
+  # auth_endpoint: /auth
+
+# Allow editing through a local proxy (npx decap-server) during development
+local_backend: true
+
+publish_mode: editorial_workflow
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+site_url: https://cachecrime.github.io
+display_url: https://cachecrime.github.io
+logo_url: https://cachecrime.github.io/images/uploads/logo.png # TODO: upload a logo
+
+collections:
+  - name: investigations
+    label: Investigations
+    label_singular: Investigation
+    folder: content/investigations
+    create: true
+    extension: json
+    format: json
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{id}} — {{title}}"
+    sortable_fields: [date, title, id]
+    fields:
+      - { name: id, label: Case ID, widget: string, hint: "e.g. CC-2026-001" }
+      - { name: title, label: Title, widget: string }
+      - { name: category, label: Category, widget: string, hint: "e.g. Geolocation, Fact-check, Network Analysis" }
+      - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+      - name: status
+        label: Status
+        widget: select
+        options: ["PUBLISHED", "UNDER INVESTIGATION", "MONITORING", "UPDATED"]
+        default: "UNDER INVESTIGATION"
+      - name: severity
+        label: Severity
+        widget: select
+        options: ["CRITICAL", "HIGH", "MEDIUM", "LOW"]
+        required: false
+      - { name: summary, label: Summary, widget: text, hint: "1–2 sentences shown in the case list" }
+      - { name: coverImage, label: Cover image, widget: image, required: false }
+      - { name: tags, label: Tags, widget: list, required: false, field: { name: tag, label: Tag, widget: string } }
+      - { name: draft, label: Hide from site, widget: boolean, default: false, required: false }
+      - name: blocks
+        label: Story blocks
+        label_singular: block
+        widget: list
+        types:
+          - name: text
+            label: Text
+            widget: object
+            fields:
+              - { name: body, label: Body, widget: markdown }
+          - name: image
+            label: Image
+            widget: object
+            fields:
+              - { name: src, label: Image, widget: image }
+              - { name: alt, label: Alt text, widget: string, required: false }
+              - { name: caption, label: Caption, widget: string, required: false }
+              - { name: credit, label: Credit, widget: string, required: false }
+          - name: compare
+            label: Before/After comparison
+            widget: object
+            fields:
+              - { name: before, label: Before image, widget: image }
+              - { name: after, label: After image, widget: image }
+              - { name: beforeLabel, label: Before label, widget: string, default: "BEFORE", required: false }
+              - { name: afterLabel, label: After label, widget: string, default: "AFTER", required: false }
+              - { name: caption, label: Caption, widget: string, required: false }
+          - name: timeline
+            label: Timeline
+            widget: object
+            fields:
+              - { name: title, label: Title, widget: string, required: false }
+              - name: events
+                label: Events
+                widget: list
+                fields:
+                  - { name: date, label: Date, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: body, label: Description, widget: text, required: false }
+                  - { name: image, label: Image, widget: image, required: false }
+          - name: map
+            label: Interactive map
+            widget: object
+            fields:
+              - { name: title, label: Title, widget: string, required: false }
+              - name: center
+                label: Map center
+                widget: object
+                fields:
+                  - { name: lat, label: Latitude, widget: number, value_type: float }
+                  - { name: lng, label: Longitude, widget: number, value_type: float }
+              - { name: zoom, label: Zoom level, widget: number, value_type: int, default: 12, min: 1, max: 19 }
+              - name: markers
+                label: Markers
+                widget: list
+                required: false
+                fields:
+                  - { name: lat, label: Latitude, widget: number, value_type: float }
+                  - { name: lng, label: Longitude, widget: number, value_type: float }
+                  - { name: label, label: Label, widget: string }
+                  - { name: body, label: Popup text, widget: text, required: false }
+              - { name: caption, label: Caption, widget: string, required: false }
+          - name: document
+            label: Document (PDF)
+            widget: object
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: file, label: File, widget: file }
+              - { name: description, label: Description, widget: text, required: false }
+          - name: video
+            label: Video embed
+            widget: object
+            fields:
+              - { name: url, label: Video URL, widget: string, hint: "YouTube / Vimeo URL, or direct .mp4 link" }
+              - { name: caption, label: Caption, widget: string, required: false }
+          - name: quote
+            label: Pull quote
+            widget: object
+            fields:
+              - { name: text, label: Quote, widget: text }
+              - { name: attribution, label: Attribution, widget: string, required: false }

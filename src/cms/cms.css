@@ -1,0 +1,62 @@
+/* Styles for CMS-rendered story content (CMS-owned file, survives AI Studio syncs) */
+
+.story-prose {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: #333;
+}
+.story-prose p {
+  margin: 0 0 1.1em;
+}
+.story-prose h2,
+.story-prose h3 {
+  font-weight: 700;
+  color: #000;
+  letter-spacing: -0.01em;
+  margin: 1.6em 0 0.6em;
+}
+.story-prose h2 {
+  font-size: 1.35rem;
+}
+.story-prose h3 {
+  font-size: 1.1rem;
+}
+.story-prose a {
+  color: #ff4a1c;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.story-prose ul,
+.story-prose ol {
+  margin: 0 0 1.1em;
+  padding-left: 1.4em;
+}
+.story-prose li {
+  margin-bottom: 0.35em;
+}
+.story-prose blockquote {
+  border-left: 3px solid #ff4a1c;
+  margin: 1.2em 0;
+  padding: 0.2em 0 0.2em 1em;
+  color: #555;
+  font-style: italic;
+}
+.story-prose code {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.85em;
+  background: #f3f3f3;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+.story-prose img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+/* Leaflet map container needs an explicit height */
+.story-map {
+  height: 380px;
+  width: 100%;
+  border-radius: 16px;
+  z-index: 0;
+}

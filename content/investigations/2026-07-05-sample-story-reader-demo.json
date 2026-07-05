@@ -1,0 +1,89 @@
+{
+  "id": "CC-SAMPLE-001",
+  "title": "SAMPLE — How the Cachecrime story reader works",
+  "category": "Sample / Documentation",
+  "date": "2026-07-05",
+  "status": "MONITORING",
+  "severity": "LOW",
+  "summary": "A demonstration story showing every content block available in the CMS: text, images, before/after comparison, timeline, interactive map, document viewer, video and pull quotes. Delete this once real investigations are published.",
+  "coverImage": "/images/kayaks_lake_1783183001508.jpg",
+  "tags": ["sample", "delete-me"],
+  "draft": false,
+  "blocks": [
+    {
+      "type": "text",
+      "body": "This is a **text block**. It supports full Markdown: headings, [links](https://cachecrime.github.io), lists and `inline code`.\n\nUse text blocks for the narrative body of an investigation. Every other block type below can be inserted between text blocks to build an immersive, evidence-first story."
+    },
+    {
+      "type": "quote",
+      "text": "Every finding is published with its verification trail attached.",
+      "attribution": "Cachecrime editorial standard"
+    },
+    {
+      "type": "image",
+      "src": "/images/oranges_branch_1783182988575.jpg",
+      "alt": "Sample image",
+      "caption": "An image block with a caption.",
+      "credit": "Placeholder"
+    },
+    {
+      "type": "compare",
+      "before": "/images/techwear_model_2_1783163045977.jpg",
+      "after": "/images/techwear_model_3_1783163058987.jpg",
+      "beforeLabel": "CLAIMED",
+      "afterLabel": "VERIFIED",
+      "caption": "A before/after comparison slider — drag across the image. Ideal for satellite imagery taken at two dates, or claim vs. reality."
+    },
+    {
+      "type": "timeline",
+      "title": "Timeline of events",
+      "events": [
+        {
+          "date": "2026-07-01",
+          "title": "First claim circulates",
+          "body": "Describe what was claimed and where it spread."
+        },
+        {
+          "date": "2026-07-03",
+          "title": "Footage geolocated",
+          "body": "Describe the verification step and the evidence."
+        },
+        {
+          "date": "2026-07-05",
+          "title": "Finding published",
+          "body": "Link to the published verification trail."
+        }
+      ]
+    },
+    {
+      "type": "map",
+      "title": "Geolocation",
+      "center": { "lat": -1.2921, "lng": 36.8219 },
+      "zoom": 12,
+      "markers": [
+        {
+          "lat": -1.2921,
+          "lng": 36.8219,
+          "label": "Nairobi CBD",
+          "body": "Sample marker — click markers to see evidence notes."
+        }
+      ],
+      "caption": "An interactive map block (OpenStreetMap, no API key required)."
+    },
+    {
+      "type": "video",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "caption": "A video embed block — paste any YouTube or Vimeo URL, or a direct .mp4 link. TODO: replace with a real video."
+    },
+    {
+      "type": "text",
+      "body": "### Document viewer\n\nThe document block below embeds a PDF uploaded through the CMS media library — use it for source documents, court filings or reports. *(No sample PDF is bundled, so the frame below will 404 until you upload one.)*"
+    },
+    {
+      "type": "document",
+      "title": "Sample source document",
+      "file": "/images/uploads/sample.pdf",
+      "description": "TODO: upload a real PDF via the CMS and update this path."
+    }
+  ]
+}
