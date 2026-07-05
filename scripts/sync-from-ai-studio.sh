@@ -56,8 +56,19 @@ rsync -a --delete \
   --exclude 'public/admin' \
   --exclude 'public/images/uploads' \
   --exclude 'src/cms' \
+  --exclude 'src/sections' \
   --exclude 'src/pages/Investigations.tsx' \
   "$SOURCE"/ "$REPO_ROOT"/
+
+# The cinematic hero lives in src/sections/ (protected above) but is wired
+# into src/App.tsx, which this sync just overwrote. Warn if the wiring is gone.
+if ! grep -q "CinematicHero" "$REPO_ROOT/src/App.tsx"; then
+  echo ""
+  echo "!! WARNING: src/App.tsx no longer renders <CinematicHero />."
+  echo "!! The AI Studio export replaced the home hero wiring — re-add the"
+  echo "!! import and render (see src/sections/CinematicHero.tsx header note)."
+  echo ""
+fi
 
 cd "$REPO_ROOT"
 
