@@ -31,7 +31,9 @@ import {
   Github,
   Search,
   ShieldAlert,
-  Palette
+  Palette,
+  Sun,
+  Moon
 } from "lucide-react";
 
 import Investigations from "./pages/Investigations";
@@ -43,71 +45,70 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Tools from "./pages/Tools";
 import Graphics from "./pages/Graphics";
 import LetsCollaborate from "./pages/LetsCollaborate";
-import CinematicHero from "./sections/CinematicHero";
 
 // Slide Data matching the exact aesthetic of the mockups with custom generated image assets
 const SLIDES = [
   {
     id: 1,
-    image: "/images/techwear_model_1783163010199.jpg",
-    title: "lab.",
-    collection: "First Collection // 19.8.19",
-    chinese: "该死的",
+    image: "/images/satellite_forensic_map_1783279004268.jpg",
+    title: "map.",
+    collection: "FORENSIC ARCHITECTURE // CASE 01",
+    chinese: "地理调查",
     location: "COPENHAGEN, DENMARK",
-    mfg: "BOLOGNA ITALY",
-    code: "LAB TECH//2019",
-    desc1: "FOR AUTHENTICATION OF X-LABS GEAR. SPRING/SUMMER COLLECTION AND PROTECTION.",
-    desc2: "KEEP UNSEEN.",
-    desc3: "FOR AUTHENTICATION OF X-LABS GEAR.",
-    desc4: "SPRING/SUMMER COLLECTION A",
-    badge: "X-LABS MATERIALS OF CREATION 2019",
+    mfg: "SATELLITE INTEL",
+    code: "MAP FORENSIC//2026",
+    desc1: "TERRAIN RECONSTRUCTION AND BORDER TRACKING LOGS FOR REFUGEE ARRIVAL PHASES IN SCANDINAVIA.",
+    desc2: "INTEGRATED INTEL.",
+    desc3: "OPTIMIZED SPATIAL DATA VISUALIZATION SYSTEMS.",
+    desc4: "ACTIVE INVESTIGATION PORTAL 01",
+    badge: "MAPPED BORDERS DIVISION 2026",
     specs: {
-      materials: "3-Layer GORE-TEX Pro, Ripstop Nylon, Fidlock Magnetic Closures",
-      protection: "IPX-5 Waterproofing, Windproof laminate, UV Block 50+",
-      fit: "Modular relaxed profile, adjustable neck drape, utility harness",
-      serial: "X-LABS // SN-19819-CPH"
+      materials: "Orthorectified Sentinel-2 Multispectral Imagery, SAR Radar",
+      protection: "High-resolution topographic vectors, GIS Layering",
+      fit: "Georeferenced projection EPSG:3857 (Web Mercator)",
+      serial: "MAP-LABS // SN-2026-DK"
     }
   },
   {
     id: 2,
-    image: "/images/techwear_model_2_1783163045977.jpg",
-    title: "mod.",
-    collection: "Second Collection // 20.3.20",
-    chinese: "系统化",
+    image: "/images/satellite_urban_grid_1783279049512.jpg",
+    title: "grid.",
+    collection: "SURVEILLANCE FORENSICS // CASE 02",
+    chinese: "城市监控",
     location: "TOKYO, JAPAN",
-    mfg: "MILAN ITALY",
-    code: "SYS TECH//2020",
-    desc1: "PREMIUM MODULAR APPAREL SYSTEMS. INTEGRATED WEATHERPROOF COATING AND HIGH VENTILATION.",
-    desc2: "TACTICAL STABILITY.",
-    desc3: "FOR INTUITIVE ADAPTIVE LAYER FLOW.",
-    desc4: "AUTUMN/WINTER SPECIFICATION B",
-    badge: "SYS-LABS MODULAR DIVISION 2020",
+    mfg: "AIRBORNE SENSORS",
+    code: "GRID FORENSIC//2026",
+    desc1: "CELLULAR TRIANGULATION AND THERMAL IMAGING ANOMALIES DETECTED IN HIGH-DENSITY URBAN ENVIRONMENTS.",
+    desc2: "TACTICAL RECON.",
+    desc3: "FOR INTUITIVE ADAPTIVE DENSE METRO SCAN.",
+    desc4: "ACTIVE URBAN SCANNING PORTAL 02",
+    badge: "URBAN PATTERNS DIVISION 2026",
     specs: {
-      materials: "DWR Coated Heavyweight Cotton-Poly Blend, YKK Aquaguard Zippers",
-      protection: "Extreme Cold Insulation, Breathable mesh panels, Water resistant shell",
-      fit: "Ergonomic curved sleeves, modular hood detachment, double straps",
-      serial: "SYS-LABS // SN-20320-TYO"
+      materials: "High-Altitude Reconnaissance, Thermal Infrared Sensors",
+      protection: "Cell Tower Sector Triangulation, RF Heatmapping",
+      fit: "3D Urban mesh overlays, sub-meter accuracy geo-registration",
+      serial: "GRID-LABS // SN-2026-JP"
     }
   },
   {
     id: 3,
-    image: "/images/techwear_model_3_1783163058987.jpg",
-    title: "vdr.",
-    collection: "Third Collection // 12.11.20",
-    chinese: "未来派",
+    image: "/images/satellite_maritime_radar_1783279065694.jpg",
+    title: "nav.",
+    collection: "MARITIME TRACING // CASE 03",
+    chinese: "雷达搜寻",
     location: "BERLIN, GERMANY",
-    mfg: "SEOUL SOUTH KOREA",
-    code: "VDR TECH//2020",
-    desc1: "REINFORCED SILHOUETTES WITH REFLECTIVE LAYER VISORS AND MODULAR ACCESSORIES.",
-    desc2: "COVERT ENCLOSURES.",
-    desc3: "OPTIMIZED FOR LIGHTWEIGHT ADAPTIVE FLOW.",
-    desc4: "SPRING/SUMMER SPECIFICATION C",
-    badge: "VDR-LABS COVERT INITIATIVE 2020",
+    mfg: "COASTAL TRACKING",
+    code: "NAV FORENSIC//2026",
+    desc1: "COASTAL RADAR ARRAY RETRIEVALS AND DEVIANT VESSEL ROUTE RECONSTRUCTION IN EXCLUSION ZONES.",
+    desc2: "OCEAN SEARCH.",
+    desc3: "TRACKING MARITIME BORDER FLOW & SHIP ID.",
+    desc4: "ACTIVE MARITIME SCAN PORTAL 03",
+    badge: "RADAR MARITIME INITIATIVE 2026",
     specs: {
-      materials: "Reflective Glass-beaded Polyurethane, Magnetic quick-release harness",
-      protection: "3M Retroreflective coating, Anti-microbial face liner, dust-proof seal",
-      fit: "Snug modular face mask interface, quick-cinch back cords",
-      serial: "VDR-LABS // SN-121120-BER"
+      materials: "Synthetic Aperture Radar (SAR), Automatic Identification System (AIS)",
+      protection: "Vessel track reconstruction, anomalous course detection",
+      fit: "High-resolution marine navigation charts, bathymetric layers",
+      serial: "NAV-LABS // SN-2026-EU"
     }
   }
 ];
@@ -144,8 +145,157 @@ function TypewriterLogo({ text, delay = 350 }: { text: string; delay?: number })
   );
 }
 
+function NewsletterSection() {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes("@")) return;
+    setIsSubmitting(true);
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubscribed(true);
+      setEmail("");
+    }, 1200);
+  };
+
+  return (
+    <section className="w-full max-w-7xl mx-auto mt-24 mb-12 px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full rounded-3xl sm:rounded-[40px] bg-transparent sm:bg-[#F0F4F8] sm:dark:bg-[#15181F] p-0 sm:p-16 lg:p-20 flex flex-col items-center justify-center transition-colors duration-300">
+        <div className="w-full max-w-md mx-auto rounded-3xl sm:rounded-[32px] bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[0_8px_20px_#d1d9e6,0_-8px_20px_#ffffff] dark:shadow-[0_8px_20px_#0d0e12,0_-8px_20px_#272c36] sm:shadow-[12px_12px_24px_#d1d9e6,-12px_-12px_24px_#ffffff] sm:dark:shadow-[12px_12px_24px_#0d0e12,-12px_-12px_24px_#272c36] p-6 min-[375px]:p-8 sm:p-10 flex flex-col items-center border sm:border border-white/40 dark:border-white/5">
+          {/* Neumorphic Decorative Social/Identity Icons resembling reference image */}
+          <div className="flex justify-center gap-5 mb-8">
+            <a 
+              href="https://x.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[5px_5px_10px_#d1d9e6,-5px_-5px_10px_#ffffff] dark:shadow-[5px_5px_10px_#0d0e12,-5px_-5px_10px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:rotate-6 active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+            >
+              <svg 
+                viewBox="0 0 24 24" 
+                aria-hidden="true" 
+                className="w-4.5 h-4.5 fill-current"
+              >
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+            <a 
+              href="https://instagram.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[5px_5px_10px_#d1d9e6,-5px_-5px_10px_#ffffff] dark:shadow-[5px_5px_10px_#0d0e12,-5px_-5px_10px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:-rotate-6 active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+            >
+              <Instagram className="w-5 h-5 stroke-[2]" />
+            </a>
+            <a 
+              href="https://github.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-12 h-12 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[5px_5px_10px_#d1d9e6,-5px_-5px_10px_#ffffff] dark:shadow-[5px_5px_10px_#0d0e12,-5px_-5px_10px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:rotate-12 active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+            >
+              <Github className="w-5 h-5 stroke-[2]" />
+            </a>
+          </div>
+
+          {/* Core message requested by the user */}
+          <h3 className="font-mono text-xs md:text-sm font-bold text-gray-500 dark:text-gray-400 tracking-tight text-center max-w-xs mb-8 leading-relaxed uppercase">
+            Be the first to know about new investigations, projects and tools
+          </h3>
+
+          {/* Subscription Interaction Form */}
+          <div className="w-full">
+            <AnimatePresence mode="wait">
+              {!isSubscribed ? (
+                <motion.form
+                  key="form"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  onSubmit={handleSubmit}
+                  className="flex flex-col items-center w-full"
+                >
+                  {/* Neumorphic Inset Input */}
+                  <div className="w-full flex flex-col gap-2 mb-8">
+                    <div className="w-full relative rounded-2xl bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[inset_4px_4px_8px_#d1d9e6,inset_-4px_-4px_8px_#ffffff] dark:shadow-[inset_4px_4px_8px_#0d0e12,inset_-4px_-4px_8px_#272c36] px-5 py-4 flex items-center border border-white/20 dark:border-black/5">
+                      <input
+                        type="email"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        disabled={isSubmitting}
+                        className="w-full bg-transparent border-none outline-none text-gray-700 dark:text-gray-200 placeholder-gray-400 font-mono text-xs tracking-wide focus:ring-0 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Neumorphic Rounded Purple Submit Button (Identical to "Sign In" button color & style in image) */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !email}
+                    className="w-40 bg-[#8C6BE8] hover:bg-[#7D5CD7] disabled:bg-gray-300 dark:disabled:bg-gray-800 disabled:text-gray-500 dark:disabled:text-gray-600 text-white font-mono text-xs font-semibold tracking-wider py-3.5 rounded-[18px] transition-all duration-300 cursor-pointer shadow-[0_8px_20px_rgba(140,103,235,0.4)] active:scale-95 hover:scale-[1.03] flex items-center justify-center gap-2 border border-white/20 dark:border-white/5"
+                  >
+                    {isSubmitting ? (
+                      <span className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                    ) : (
+                      "Subscribe"
+                    )}
+                  </button>
+                </motion.form>
+              ) : (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="flex flex-col items-center justify-center py-6 text-center"
+                >
+                  <div className="w-14 h-14 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[5px_5px_10px_#d1d9e6,-5px_-5px_10px_#ffffff] dark:shadow-[5px_5px_10px_#0d0e12,-5px_-5px_10px_#272c36] flex items-center justify-center text-emerald-500 mb-6 border border-white/50 dark:border-white/[0.02]">
+                    <Check className="w-5 h-5 stroke-[3]" />
+                  </div>
+                  <h4 className="font-mono font-bold text-emerald-500 text-xs tracking-wider uppercase mb-2">
+                    ACCESS GRANTED
+                  </h4>
+                  <p className="font-mono text-[10px] text-gray-500 dark:text-gray-400 max-w-xs leading-relaxed px-4">
+                    Your email clearance has been registered. Welcome to cachecrime.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Neumorphic bottom caption links inspired by "New here? Create account" */}
+          <div className="mt-8 flex flex-col items-center gap-1.5 font-mono text-[9px] text-gray-400 dark:text-gray-500">
+            <a href="#practices" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors uppercase tracking-wider">
+              New here? Read standard practices
+            </a>
+            <a href="#collaborate" className="hover:text-gray-600 dark:hover:text-gray-300 transition-colors uppercase tracking-wider">
+              Want to collaborate?
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const stored = localStorage.getItem("theme");
+    return (stored as "light" | "dark") || "light";
+  });
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -180,6 +330,13 @@ export default function App() {
     setActiveIdx(idx);
   };
 
+  const scrollToContent = () => {
+    const element = document.getElementById("editorial-section");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -200,7 +357,7 @@ export default function App() {
   }, [activeIdx]);
 
   return (
-    <div className={`min-h-screen w-full bg-[#E1E1E1] flex flex-col px-6 pb-6 pt-0 md:px-10 md:pb-10 md:pt-0 relative overflow-x-hidden font-sans ${isLoading ? "overflow-y-hidden h-screen" : "overflow-y-auto"}`}>
+    <div className={`min-h-screen w-full bg-[#E1E1E1] dark:bg-[#0B0B0C] text-black dark:text-white flex flex-col px-6 pb-6 pt-0 md:px-10 md:pb-10 md:pt-0 relative overflow-x-hidden font-sans ${isLoading ? "overflow-y-hidden h-screen" : "overflow-y-auto"}`}>
       <AnimatePresence>
         {isLoading && (
           <motion.div
@@ -225,115 +382,83 @@ export default function App() {
       </AnimatePresence>
       
       {/* FIXED HANGING TOP NAVIGATION BAR */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#E1E1E1]/95 backdrop-blur-md px-6 py-4 md:px-10 md:py-6 border-b border-black/10 flex justify-center transition-all">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#F0F4F8]/80 dark:bg-[#15181F]/80 backdrop-blur-md px-3 py-3 sm:px-4 md:px-10 md:py-6 border-b border-[#d1d9e6]/50 dark:border-black/20 flex justify-center transition-all">
         <div className="w-full max-w-7xl flex items-center justify-between">
-          <div className="flex items-center gap-12">
-            {/* Bold cachecrime logo placeholder */}
+          <div className="flex items-center gap-2 md:gap-12">
+            {/* Bold cachecrime logo placeholder - monogram on mobile, full text on desktop */}
             <span 
               onClick={() => {
                 setCurrentPage("home");
                 setIsMenuOpen(false);
               }}
-              className="font-display font-black text-xl md:text-2xl tracking-tighter text-black cursor-pointer hover:text-[#FF4A1C] transition-colors duration-200 lowercase"
+              className="font-display font-black text-[13px] min-[360px]:text-sm sm:text-lg md:text-2xl tracking-tighter text-black dark:text-white cursor-pointer hover:text-[#FF4A1C] transition-colors duration-200 lowercase shrink-0"
             >
               cachecrime
             </span>
           </div>
 
-          <nav className="flex items-center gap-6 md:gap-10">
+          <nav className="flex items-center gap-1.5 sm:gap-3 md:gap-4 shrink-0">
             {/* Menu icon */}
             <div className="relative">
               
-              {/* DESKTOP BAR (Exactly like the screenshot) */}
-              <div className="hidden lg:flex items-center bg-white/95 backdrop-blur-md rounded-full px-5 py-2 border border-white/80 shadow-[0_15px_40px_rgba(0,0,0,0.06)] gap-5 select-none text-black">
+              {/* DESKTOP/TABLET/MOBILE BAR (Redesigned with beautiful, sleek Neumorphism matching the subscription card) */}
+              <div className="flex items-center bg-[#F0F4F8] dark:bg-[#1A1D24] rounded-full px-2 py-1 sm:px-4 sm:py-2 md:px-5 md:py-2.5 lg:px-6 border border-white/50 dark:border-white/5 shadow-[4px_4px_8px_#d1d9e6,-4px_-4px_8px_#ffffff] dark:shadow-[4px_4px_8px_#0d0e12,-4px_-4px_8px_#272c36] sm:shadow-[8px_8px_16px_#d1d9e6,-8px_-8px_16px_#ffffff] sm:dark:shadow-[8px_8px_16px_#0d0e12,-8px_-8px_16px_#272c36] gap-1.5 sm:gap-3 md:gap-4 lg:gap-5 select-none text-black dark:text-white transition-colors duration-300">
                 {/* Profile section with chevron - toggles dropdown */}
                 <button 
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex items-center gap-2.5 hover:opacity-85 transition-opacity cursor-pointer text-left"
+                  className="flex items-center gap-1 sm:gap-1.5 hover:opacity-85 transition-opacity cursor-pointer text-left text-black dark:text-white shrink-0"
                 >
-                  <span className="font-display font-black text-sm tracking-tight text-black lowercase mr-1">
+                  <span className="font-display font-black text-sm tracking-tight text-black dark:text-white lowercase mr-1 hidden xl:inline">
                     cachecrime
                   </span>
                   <img 
                     src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=120&h=120" 
                     alt="cachecrime avatar" 
-                    className="w-7 h-7 rounded-xl object-cover border border-black/5"
+                    className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 rounded-lg sm:rounded-xl object-cover border border-white/40 dark:border-white/10 shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] shrink-0"
                   />
-                  <span className="font-bold text-xs tracking-tight text-black font-sans">see our projects</span>
-                  <ChevronDown className={`w-3.5 h-3.5 text-gray-500 transition-transform duration-200 ${isMenuOpen ? "rotate-180" : ""}`} />
+                  <span className="font-bold text-xs tracking-tight text-gray-700 dark:text-gray-200 font-sans hidden md:inline whitespace-nowrap">see our projects</span>
+                  <ChevronDown className={`w-3 h-3 sm:w-3.5 sm:h-3.5 text-gray-500 dark:text-gray-400 transition-transform duration-200 shrink-0 ${isMenuOpen ? "rotate-180 text-[#8C6BE8]" : ""}`} />
                 </button>
 
                 {/* Divider */}
-                <div className="w-[1px] h-4 bg-black/10" />
+                <div className="hidden sm:block w-[1.5px] h-5 bg-[#d1d9e6] dark:bg-[#272c36] shrink-0" />
 
-                {/* Slanted "Lessons" Button */}
+                {/* Neumorphic Inset "Lessons" Button */}
                 <a 
                   href="#lessons"
-                  className="bg-[#F3F3F5] hover:bg-[#EAEAEA] active:scale-95 transition-all px-4 py-1.5 rounded-[10px] -skew-x-[12deg] flex items-center gap-2"
+                  className="hidden sm:flex bg-[#F0F4F8] dark:bg-[#1A1D24] hover:bg-[#F0F4F8] dark:hover:bg-[#1A1D24] shadow-[inset_2px_2px_4px_#d1d9e6,inset_-2px_-2px_4px_#ffffff] dark:shadow-[inset_2px_2px_4px_#0d0e12,inset_-2px_-2px_4px_#272c36] active:scale-95 transition-all px-2 py-1 md:px-3.5 md:py-1.5 rounded-xl flex items-center gap-1.5 sm:gap-2 shrink-0 border border-white/20 dark:border-black/10"
                 >
-                  <div className="skew-x-[12deg] flex items-center gap-1.5 font-bold text-[11px] tracking-tight text-gray-600">
-                    <BookOpen className="w-3.5 h-3.5 text-gray-400 stroke-[2.5]" />
-                    <span>Lessons</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-[10px] sm:text-[11px] tracking-tight text-gray-600 dark:text-gray-300">
+                    <BookOpen className="w-3.5 h-3.5 text-[#8C6BE8] dark:text-[#8C6BE8] stroke-[2.5]" />
+                    <span className="hidden lg:inline">Lessons</span>
                   </div>
                 </a>
 
-                {/* Slanted "Achievements" Button */}
+                {/* Neumorphic Inset "Achievements" Button */}
                 <a 
                   href="#achievements"
-                  className="bg-[#F3F3F5] hover:bg-[#EAEAEA] active:scale-95 transition-all px-4 py-1.5 rounded-[10px] -skew-x-[12deg] flex items-center gap-2"
+                  className="hidden sm:flex bg-[#F0F4F8] dark:bg-[#1A1D24] hover:bg-[#F0F4F8] dark:hover:bg-[#1A1D24] shadow-[inset_2px_2px_4px_#d1d9e6,inset_-2px_-2px_4px_#ffffff] dark:shadow-[inset_2px_2px_4px_#0d0e12,inset_-2px_-2px_4px_#272c36] active:scale-95 transition-all px-2 py-1 md:px-3.5 md:py-1.5 rounded-xl flex items-center gap-1.5 sm:gap-2 shrink-0 border border-white/20 dark:border-black/10"
                 >
-                  <div className="skew-x-[12deg] flex items-center gap-1.5 font-bold text-[11px] tracking-tight text-gray-600">
-                    <Award className="w-3.5 h-3.5 text-gray-400 stroke-[2.5]" />
-                    <span>Achievements</span>
+                  <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-[10px] sm:text-[11px] tracking-tight text-gray-600 dark:text-gray-300">
+                    <Award className="w-3.5 h-3.5 text-[#8C6BE8] dark:text-[#8C6BE8] stroke-[2.5]" />
+                    <span className="hidden lg:inline">Achievements</span>
                   </div>
                 </a>
 
                 {/* Wallet Section */}
-                <div className="flex items-center text-[11px] font-semibold text-gray-400 gap-1 pl-1">
-                  <span>Wallet</span>
-                  <span className="text-black font-extrabold text-[12px]">$19.40</span>
+                <div className="flex items-center text-[10px] sm:text-[11px] font-semibold text-gray-400 dark:text-gray-500 gap-1 pl-1 shrink-0">
+                  <span className="hidden lg:inline font-mono text-[9px] uppercase tracking-wider">Wallet</span>
+                  <span className="text-[#8C6BE8] dark:text-[#8C6BE8] font-black text-[11px] sm:text-[12px]">$19.40</span>
                 </div>
 
                 {/* Fingerprint Button */}
                 <button 
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="text-gray-300 hover:text-black hover:scale-110 active:scale-95 transition-all cursor-pointer"
+                  className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:shadow-[3px_3px_6px_#0d0e12,-3px_-3px_6px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-105 hover:text-[#7D5CD7] active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02] shrink-0"
                 >
-                  <Fingerprint className="w-5 h-5 stroke-[1.5]" />
+                  <Fingerprint className="w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 stroke-[1.8]" />
                 </button>
               </div>
-
-              {/* TABLET TRIGGER: Candy box style (3x3 dots) */}
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`hidden md:flex lg:hidden items-center justify-center p-2 rounded-xl transition-all duration-300 cursor-pointer ${
-                  isMenuOpen ? "bg-white text-[#FF4A1C] shadow-sm scale-110" : "text-black hover:text-[#FF4A1C] hover:bg-white/50"
-                }`}
-                aria-label="Toggle menu (Tablet)"
-              >
-                <div className="grid grid-cols-3 gap-1 w-4 h-4 md:w-5 md:h-5 items-center justify-items-center">
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                  <div className="w-1.5 h-1.5 bg-current rounded-full transition-all duration-300" />
-                </div>
-              </button>
-
-              {/* MOBILE TRIGGER: Kebab style (3 vertical dots) */}
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`flex md:hidden items-center justify-center p-2 rounded-xl transition-all duration-300 cursor-pointer ${
-                  isMenuOpen ? "bg-white text-[#FF4A1C] shadow-sm scale-110" : "text-black hover:text-[#FF4A1C] hover:bg-white/50"
-                }`}
-                aria-label="Toggle menu (Mobile)"
-              >
-                <MoreVertical className="w-5 h-5" />
-              </button>
 
               {/* HIGH FIDELITY DROPDOWN OVERLAY (Mimics Faizur / Candy box menu second image) */}
               <AnimatePresence>
@@ -349,11 +474,11 @@ export default function App() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 15, scale: 0.95 }}
                       transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute right-0 mt-3 w-[295px] sm:w-[500px] bg-[#EAEAEA] rounded-[24px] shadow-[0_25px_60px_rgba(0,0,0,0.18)] border border-white/50 p-6 md:p-8 z-50 flex flex-col gap-6 text-left text-black select-text"
+                      className="absolute right-0 mt-3 w-[295px] sm:w-[500px] bg-[#EAEAEA] dark:bg-[#1A1A1E] rounded-[24px] shadow-[0_25px_60px_rgba(0,0,0,0.18)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-white/50 dark:border-white/10 p-6 md:p-8 z-50 flex flex-col gap-6 text-left text-black dark:text-white select-text"
                     >
                       {/* Menu title with Sparkle */}
-                      <div className="flex items-center gap-2 text-black border-b border-black/5 pb-4">
-                        <Sparkles className="w-5 h-5 text-black fill-black/10" />
+                      <div className="flex items-center gap-2 text-black dark:text-white border-b border-black/5 dark:border-white/10 pb-4">
+                        <Sparkles className="w-5 h-5 text-black dark:text-white fill-black/10 dark:fill-white/10" />
                         <span className="font-display font-black text-xl tracking-tight">Menu</span>
                       </div>
 
@@ -362,7 +487,7 @@ export default function App() {
                         
                         {/* LEFT COLUMN: Main application links */}
                         <div className="flex flex-col gap-1.5">
-                          <div className="font-mono text-[9px] text-gray-400 font-extrabold tracking-widest uppercase mb-1">
+                          <div className="font-mono text-[9px] text-gray-500 dark:text-gray-400 font-extrabold tracking-widest uppercase mb-1">
                             Core Lab Sections
                           </div>
 
@@ -374,11 +499,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "home" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <Home className="w-4 h-4 text-gray-500" />
+                            <Home className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Home / Lab</span>
                           </button>
 
@@ -390,11 +515,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "investigations" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <Search className="w-4 h-4 text-gray-500" />
+                            <Search className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Investigations</span>
                           </button>
 
@@ -406,11 +531,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "who-we-are" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <Users className="w-4 h-4 text-gray-500" />
+                            <Users className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Who we are</span>
                           </button>
 
@@ -422,11 +547,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "projects" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <Folder className="w-4 h-4 text-gray-500" />
+                            <Folder className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Projects</span>
                           </button>
 
@@ -438,11 +563,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "tools" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <Cpu className="w-4 h-4 text-gray-500" />
+                            <Cpu className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Lab Tools</span>
                           </button>
 
@@ -454,18 +579,18 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "graphics" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <Palette className="w-4 h-4 text-gray-500" />
+                            <Palette className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Graphics</span>
                           </button>
                         </div>
 
                         {/* RIGHT COLUMN: Nested lists and folders */}
                         <div className="flex flex-col gap-1.5">
-                          <div className="font-mono text-[9px] text-gray-400 font-extrabold tracking-widest uppercase mb-1">
+                          <div className="font-mono text-[9px] text-gray-500 dark:text-gray-400 font-extrabold tracking-widest uppercase mb-1">
                             Compliance & Colabs
                           </div>
 
@@ -477,11 +602,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "standard-practices" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <Layers className="w-4 h-4 text-gray-500" />
+                            <Layers className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Standard practices</span>
                           </button>
 
@@ -493,11 +618,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "privacy-policy" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <ShieldCheck className="w-4 h-4 text-gray-500" />
+                            <ShieldCheck className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Privacy policy</span>
                           </button>
 
@@ -509,11 +634,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "contact-us" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <MessageSquare className="w-4 h-4 text-gray-500" />
+                            <MessageSquare className="w-4 h-4 text-gray-500 dark:text-gray-400" />
                             <span>Contact us</span>
                           </button>
 
@@ -525,11 +650,11 @@ export default function App() {
                             }}
                             className={`flex items-center gap-3 px-3 py-1.5 rounded-xl transition-all duration-150 font-semibold text-[13px] md:text-sm text-left cursor-pointer w-full ${
                               currentPage === "lets-collaborate" 
-                                ? "bg-black text-white" 
-                                : "text-gray-700 hover:text-black hover:bg-white/70"
+                                ? "bg-black text-white dark:bg-white dark:text-black" 
+                                : "text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-white/70 dark:hover:bg-white/10"
                             }`}
                           >
-                            <Plus className="w-4 h-4 text-gray-500 animate-pulse text-[#FF4A1C]" />
+                            <Plus className="w-4 h-4 text-[#FF4A1C] animate-pulse" />
                             <span className="text-[#FF4A1C] font-black">Let's collaborate</span>
                           </button>
                         </div>
@@ -540,17 +665,29 @@ export default function App() {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Moon/Sun Dark & Light mode toggle to the right of menu */}
+            <button
+              onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
+              className="w-11 h-11 rounded-[16px] bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[5px_5px_10px_#d1d9e6,-5px_-5px_10px_#ffffff] dark:shadow-[5px_5px_10px_#0d0e12,-5px_-5px_10px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:text-[#7D5CD7] hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02] shrink-0"
+              title={theme === "dark" ? "Activate Light Mode" : "Activate Dark Mode"}
+              aria-label="Toggle dark/light theme"
+              id="theme-toggle-btn"
+            >
+              {theme === "dark" ? (
+                <Sun className="w-4.5 h-4.5" />
+              ) : (
+                <Moon className="w-4.5 h-4.5" />
+              )}
+            </button>
           </nav>
         </div>
       </header>
 
       {currentPage === "home" ? (
         <>
-          <CinematicHero onNavigate={setCurrentPage} />
-
-
-      {/* EDITORIAL NEWSPAPER SECTION (INVESTIGATIONS & PROJECTS) */}
-      <section className="w-full max-w-7xl mx-auto py-16 md:py-24 border-t border-black/15 text-black z-10 mt-16">
+          {/* EDITORIAL NEWSPAPER SECTION (INVESTIGATIONS & PROJECTS) */}
+          <section id="editorial-section" className="w-full max-w-7xl mx-auto pb-16 pt-[110px] md:pb-24 md:pt-[140px] text-black dark:text-white z-10">
         <div className="w-full flex flex-col">
           
           {/* INVESTIGATIONS CATEGORY */}
@@ -769,121 +906,120 @@ export default function App() {
         </div>
       </section>
 
+      {/* Newsletter Section */}
+      <NewsletterSection />
 
       {/* CACHECRIME FOOTER CARD */}
-      <section className="w-full max-w-7xl mx-auto py-12 md:py-16 mt-20 border-t border-black/15 flex flex-col justify-between relative z-10">
-        
-        {/* Top Section: Four columns */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 items-start w-full z-10">
+      <section className="w-full max-w-7xl mx-auto mt-24 mb-16 px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="w-full bg-[#F0F4F8] dark:bg-[#1A1D24] rounded-3xl sm:rounded-[40px] shadow-[12px_12px_24px_#d1d9e6,-12px_-12px_24px_#ffffff] dark:shadow-[12px_12px_24px_#0d0e12,-12px_-12px_24px_#272c36] border border-white/40 dark:border-white/5 p-8 md:p-12 transition-colors duration-300 flex flex-col justify-between relative">
           
-          {/* Column 1: Slogan statement */}
-          <div className="md:col-span-7 flex flex-col text-left">
-            <h3 className="font-display font-bold text-xl md:text-2xl lg:text-[1.85rem] text-gray-950 leading-[1.25] tracking-tight max-w-lg">
-              We combine digital forensics and visual storytelling to uncover hidden truths, expose wrongdoing, and advance accountability.
-            </h3>
-          </div>
+          {/* Top Section: Four columns */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 items-start w-full z-10">
+            
+            {/* Column 1: Slogan statement */}
+            <div className="md:col-span-8 flex flex-col text-left">
+              <h3 className="font-display font-bold text-xl md:text-2xl lg:text-[1.85rem] text-gray-800 dark:text-gray-100 leading-[1.3] tracking-tight max-w-lg">
+                We combine digital forensics and visual storytelling to uncover hidden truths, expose wrongdoing, and advance accountability.
+              </h3>
+            </div>
 
-          {/* Column 3: Follow me pill buttons */}
-          <div className="md:col-span-3 flex flex-col items-start text-left">
-            <span className="font-sans font-bold text-[10px] md:text-xs text-black tracking-wider uppercase mb-4">
-              Follow our socials
-            </span>
-            <div className="flex flex-row items-center gap-4">
+            {/* Column 4: Call Action items */}
+            <div className="md:col-span-4 flex flex-col gap-4 items-start md:items-end text-left md:text-right w-full">
               
-              {/* X / Twitter */}
-              <a 
-                href="https://x.com" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="text-black hover:text-[#FF4A1C] transition-colors duration-150 p-1 -m-1"
-                aria-label="X (formerly Twitter)"
+              {/* Call cachecrime */}
+              <button 
+                onClick={() => setCurrentPage("lets-collaborate")}
+                className="group w-full md:w-auto bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[4px_4px_8px_#d1d9e6,-4px_-4px_8px_#ffffff] dark:shadow-[4px_4px_8px_#0d0e12,-4px_-4px_8px_#272c36] hover:shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:hover:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] active:scale-95 border border-white/20 dark:border-white/5 rounded-2xl p-4 flex items-center justify-between md:justify-end gap-3 cursor-pointer transition-all duration-200 text-left md:text-right"
               >
-                <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
+                <div className="flex flex-col items-start md:items-end">
+                  <span className="font-display font-black text-base text-[#8C6BE8] dark:text-[#8C6BE8] transition-colors group-hover:text-[#7D5CD7]">Call cachecrime</span>
+                  <span className="font-sans text-[10px] font-medium text-gray-400 dark:text-gray-500 mt-0.5">Let's work together</span>
+                </div>
+                <span className="w-8 h-8 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[inset_2px_2px_4px_#d1d9e6,inset_-2px_-2px_4px_#ffffff] dark:shadow-[inset_2px_2px_4px_#0d0e12,inset_-2px_-2px_4px_#272c36] text-[#FF4A1C] flex items-center justify-center group-hover:scale-105 transition-transform duration-150 flex-shrink-0">
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                </span>
+              </button>
 
-              {/* Instagram */}
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="text-black hover:text-[#FF4A1C] transition-colors duration-150 p-1 -m-1"
-                aria-label="Instagram"
+              {/* Courses & Tools */}
+              <button 
+                onClick={() => setCurrentPage("tools")}
+                className="group w-full md:w-auto bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[4px_4px_8px_#d1d9e6,-4px_-4px_8px_#ffffff] dark:shadow-[4px_4px_8px_#0d0e12,-4px_-4px_8px_#272c36] hover:shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:hover:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] active:scale-95 border border-white/20 dark:border-white/5 rounded-2xl p-4 flex items-center justify-between md:justify-end gap-3 cursor-pointer transition-all duration-200 text-left md:text-right"
               >
-                <Instagram className="w-[18px] h-[18px]" />
-              </a>
-
-              {/* GitHub */}
-              <a 
-                href="https://github.com" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="text-black hover:text-[#FF4A1C] transition-colors duration-150 p-1 -m-1"
-                aria-label="Github"
-              >
-                <Github className="w-[18px] h-[18px]" />
-              </a>
+                <div className="flex flex-col items-start md:items-end">
+                  <span className="font-display font-black text-base text-gray-800 dark:text-gray-200">Courses & Tools</span>
+                  <span className="font-sans text-[10px] font-medium text-gray-400 dark:text-gray-500 mt-0.5">Creative tools</span>
+                </div>
+                <span className="w-8 h-8 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[inset_2px_2px_4px_#d1d9e6,inset_-2px_-2px_4px_#ffffff] dark:shadow-[inset_2px_2px_4px_#0d0e12,inset_-2px_-2px_4px_#272c36] text-black dark:text-white flex items-center justify-center group-hover:scale-105 transition-transform duration-150 flex-shrink-0">
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                </span>
+              </button>
 
             </div>
+
           </div>
 
-          {/* Column 4: Call Action items */}
-          <div className="md:col-span-2 flex flex-col gap-6 items-start md:items-end text-left md:text-right">
+          {/* Bottom Metadata bar */}
+          <div className="w-full h-[1.5px] bg-[#d1d9e6]/70 dark:bg-[#272c36]/70 my-6 z-10" />
+
+          <div className="w-full flex flex-col sm:flex-row items-center justify-between font-sans text-xs font-medium text-gray-400 gap-4 z-10">
             
-            {/* Call cachecrime */}
-            <button 
-              onClick={() => setCurrentPage("lets-collaborate")}
-              className="group flex flex-col items-start md:items-end text-left md:text-right cursor-pointer"
-            >
-              <div className="flex items-center gap-2 font-display font-bold text-xl text-[#FF4A1C] hover:text-[#e03a10] transition-colors duration-150">
-                <span>Call cachecrime</span>
-                <span className="w-5.5 h-5.5 rounded-full bg-[#FF4A1C] text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-150 flex-shrink-0 shadow-[0_3px_10px_rgba(255,74,28,0.2)]">
-                  <ArrowUpRight className="w-3 h-3 stroke-[3]" />
-                </span>
-              </div>
-              <span className="font-sans text-xs font-medium text-gray-400 mt-1">Let's work together</span>
-            </button>
+            {/* Left copyright and legal */}
+            <div className="flex items-center gap-2">
+              <span className="text-gray-500 font-bold">cachecrime ©2026</span>
+              <span className="text-gray-300">•</span>
+              <button 
+                onClick={() => setCurrentPage("privacy-policy")} 
+                className="hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-150 cursor-pointer"
+              >
+                Privacy Policy
+              </button>
+            </div>
 
-            {/* Courses & Tools */}
-            <button 
-              onClick={() => setCurrentPage("tools")}
-              className="group flex flex-col items-start md:items-end text-left md:text-right cursor-pointer"
-            >
-              <div className="flex items-center gap-2 font-display font-bold text-xl text-black hover:text-[#FF4A1C] transition-colors duration-150">
-                <span>Courses & Tools</span>
-                <span className="w-5.5 h-5.5 rounded-full bg-black text-white flex items-center justify-center group-hover:scale-110 transition-transform duration-150 flex-shrink-0">
-                  <ArrowUpRight className="w-3 h-3 stroke-[3]" />
-                </span>
+            {/* Right: Relocated FOLLOW OUR SOCIALS */}
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+              <span className="font-sans font-bold text-xs text-gray-500 dark:text-gray-400 tracking-wider uppercase">
+                Follow our socials
+              </span>
+              <div className="flex flex-row items-center gap-3">
+                {/* X / Twitter */}
+                <a 
+                  href="https://x.com" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="w-7 h-7 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:text-[#7D5CD7] active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+                  aria-label="X (formerly Twitter)"
+                >
+                  <svg className="w-[11px] h-[11px] fill-current" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+
+                {/* Instagram */}
+                <a 
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="w-7 h-7 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:text-[#7D5CD7] active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-[11px] h-[11px]" />
+                </a>
+
+                {/* GitHub */}
+                <a 
+                  href="https://github.com" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="w-7 h-7 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:text-[#7D5CD7] active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+                  aria-label="Github"
+                >
+                  <Github className="w-[11px] h-[11px]" />
+                </a>
               </div>
-              <span className="font-sans text-xs font-medium text-gray-400 mt-1">Creative tools</span>
-            </button>
+            </div>
 
           </div>
-
         </div>
-
-
-
-        {/* Bottom Metadata bar */}
-        <div className="w-full h-[1px] bg-black/10 my-6 z-10" />
-
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between font-sans text-xs font-medium text-gray-400 gap-3 z-10">
-          
-          {/* Left copyright and legal */}
-          <div className="flex items-center gap-2">
-            <span className="text-gray-500 font-bold">cachecrime ©2026</span>
-            <span className="text-gray-300">•</span>
-            <button 
-              onClick={() => setCurrentPage("privacy-policy")} 
-              className="hover:text-gray-700 transition-colors duration-150 cursor-pointer"
-            >
-              Privacy Policy
-            </button>
-          </div>
-
-        </div>
-
       </section>
     </>
   ) : (
@@ -901,19 +1037,65 @@ export default function App() {
         {currentPage === "lets-collaborate" && <LetsCollaborate />}
       </div>
 
+      {/* Newsletter Section */}
+      <NewsletterSection />
+
       {/* Elegant Simplified Subpage Footer */}
-      <footer className="w-full border-t border-black/15 pt-8 pb-4 mt-12 flex flex-col gap-6">
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between font-sans text-xs font-medium text-gray-400 gap-3">
+      <footer className="w-full bg-[#F0F4F8] dark:bg-[#1A1D24] rounded-2xl sm:rounded-3xl shadow-[6px_6px_12px_#d1d9e6,-6px_-6px_12px_#ffffff] dark:shadow-[6px_6px_12px_#0d0e12,-6px_-6px_12px_#272c36] border border-white/40 dark:border-white/5 px-6 py-5 mt-12 mb-6 flex flex-col gap-6 transition-colors duration-300">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between font-sans text-xs font-medium text-gray-400 gap-4">
           {/* Left copyright and legal */}
           <div className="flex items-center gap-2">
             <span className="text-gray-500 font-bold">cachecrime ©2026</span>
             <span className="text-gray-300">•</span>
             <button 
               onClick={() => setCurrentPage("privacy-policy")} 
-              className="hover:text-gray-700 transition-colors duration-150 cursor-pointer"
+              className="hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-150 cursor-pointer"
             >
               Privacy Policy
             </button>
+          </div>
+
+          {/* Right: Relocated FOLLOW OUR SOCIALS */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
+            <span className="font-sans font-bold text-xs text-gray-500 dark:text-gray-400 tracking-wider uppercase">
+              Follow our socials
+            </span>
+            <div className="flex flex-row items-center gap-3">
+              {/* X / Twitter */}
+              <a 
+                href="https://x.com" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="w-7 h-7 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:text-[#7D5CD7] active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+                aria-label="X (formerly Twitter)"
+              >
+                <svg className="w-[11px] h-[11px] fill-current" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+
+              {/* Instagram */}
+              <a 
+                href="https://instagram.com" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="w-7 h-7 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:text-[#7D5CD7] active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-[11px] h-[11px]" />
+              </a>
+
+              {/* GitHub */}
+              <a 
+                href="https://github.com" 
+                target="_blank" 
+                rel="noreferrer" 
+                className="w-7 h-7 rounded-full bg-[#F0F4F8] dark:bg-[#1A1D24] shadow-[2px_2px_4px_#d1d9e6,-2px_-2px_4px_#ffffff] dark:shadow-[2px_2px_4px_#0d0e12,-2px_-2px_4px_#272c36] flex items-center justify-center text-[#8C6BE8] hover:scale-110 hover:text-[#7D5CD7] active:scale-95 transition-all duration-200 cursor-pointer border border-white/50 dark:border-white/[0.02]"
+                aria-label="Github"
+              >
+                <Github className="w-[11px] h-[11px]" />
+              </a>
+            </div>
           </div>
         </div>
       </footer>
