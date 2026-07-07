@@ -1,14 +1,6 @@
 {
-  "id": "CC-SAMPLE-001",
-  "title": "SAMPLE — How the Cachecrime story reader works",
-  "category": "Sample / Documentation",
-  "date": "2026-07-05",
-  "status": "MONITORING",
-  "severity": "LOW",
-  "summary": "A demonstration story showing every content block available in the CMS: text, images, before/after comparison, timeline, interactive map, document viewer, video and pull quotes. Delete this once real investigations are published.",
-  "coverImage": "/images/kayaks_lake_1783183001508.jpg",
-  "tags": ["sample", "delete-me"],
   "draft": false,
+  "coverImage": "/images/kayaks_lake_1783183001508.jpg",
   "blocks": [
     {
       "type": "text",
@@ -58,7 +50,10 @@
     {
       "type": "map",
       "title": "Geolocation",
-      "center": { "lat": -1.2921, "lng": 36.8219 },
+      "center": {
+        "lat": -1.2921,
+        "lng": 36.8219
+      },
       "zoom": 12,
       "markers": [
         {
@@ -85,5 +80,16 @@
       "file": "/images/uploads/sample.pdf",
       "description": "TODO: upload a real PDF via the CMS and update this path."
     }
-  ]
+  ],
+  "summary": "A demonstration story showing every content block available in the CMS: text, images, before/after comparison, timeline, interactive map, document viewer, video and pull quotes. Delete this once real investigations are published.",
+  "date": "2026-07-05",
+  "status": "MONITORING",
+  "title": "The First Investigation",
+  "tags": [
+    "sample",
+    "delete-me"
+  ],
+  "id": "CC-SAMPLE-001",
+  "severity": "LOW",
+  "category": "Sample / Documentation"
 }
