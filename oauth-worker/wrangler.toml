@@ -1,0 +1,9 @@
+# Cloudflare Worker config for the Cachecrime CMS OAuth relay.
+# Deploy from this folder with:  npx wrangler deploy
+# Set secrets after first deploy:
+#   npx wrangler secret put GITHUB_CLIENT_ID
+#   npx wrangler secret put GITHUB_CLIENT_SECRET
+
+name = "cachecrime-cms-auth"
+main = "worker.js"
+compatibility_date = "2024-11-01"
