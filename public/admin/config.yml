@@ -14,9 +14,9 @@ backend:
   name: github
   repo: Cachecrime/cachecrime.github.io
   branch: main
-  # Phase C (uncomment once the Cloudflare Worker OAuth relay is deployed):
-  # base_url: https://YOUR-WORKER.workers.dev
-  # auth_endpoint: /auth
+  # Phase C — remote login via the Cloudflare Worker OAuth relay (oauth-worker/)
+  base_url: https://cachecrime-cms-auth.nickspizza543.workers.dev
+  auth_endpoint: /auth
 
 # Allow editing through a local proxy (npx decap-server) during development
 local_backend: true
