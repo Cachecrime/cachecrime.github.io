@@ -42,6 +42,18 @@ python3 server.py
 This starts the server over stdio, the standard transport for MCP clients (Claude Desktop, Claude
 Code, etc.) to launch as a subprocess.
 
+## Test
+
+```bash
+cd mcp-servers/vioint-incidents
+source .venv/bin/activate
+python3 -m pip install -r requirements-dev.txt
+python3 -m pytest
+```
+
+Tests that don't require live sheet access (e.g. input-validation checks) run without
+`GOOGLE_SERVICE_ACCOUNT_FILE` set.
+
 ## Tools
 
 Both tools read columns by exact header name from row 1 of the `MergedIncidents` tab. If any of
