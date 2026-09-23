@@ -63,7 +63,8 @@ column(s) rather than returning partial data.
 ### `list_incidents(limit: int = 20)`
 
 Returns up to `limit` incidents as a list of objects with exactly these fields:
-`mergedId, title, country, severity, status, dateOccurred`.
+`mergedId, title, country, severity, status, dateOccurred`. Raises an error for a negative
+`limit`.
 
 ### `query_incidents(keyword=None, country=None, dateFrom=None, dateTo=None, minSeverity=None)`
 

@@ -59,6 +59,9 @@ def list_incidents(limit: int = 20) -> list[dict[str, str]]:
     Args:
         limit: Maximum number of incidents to return (default 20).
     """
+    if limit < 0:
+        raise RuntimeError(f"limit must be non-negative, got {limit}")
+
     rows = _fetch_rows()
     summaries = [{field: row.get(field, "").strip() for field in SUMMARY_FIELDS} for row in rows]
     return summaries[:limit]

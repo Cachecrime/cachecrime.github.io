@@ -47,15 +47,11 @@ def test_list_incidents_limit_zero_returns_empty_list(monkeypatch):
     assert server.list_incidents(limit=0) == []
 
 
-def test_list_incidents_negative_limit_drops_from_the_end(monkeypatch):
+def test_list_incidents_rejects_negative_limit(monkeypatch):
     monkeypatch.setattr(server, "_fetch_rows", lambda: SAMPLE_ROWS)
 
-    # Documents current behavior: limit is used as a raw Python slice bound
-    # (summaries[:limit]), so a negative limit silently drops rows from the
-    # end rather than being rejected as invalid input.
-    assert server.list_incidents(limit=-1) == [
-        {field: row[field] for field in server.SUMMARY_FIELDS} for row in SAMPLE_ROWS[:-1]
-    ]
+    with pytest.raises(RuntimeError, match="limit must be non-negative, got -1"):
+        server.list_incidents(limit=-1)
 
 
 def test_list_incidents_limit_larger_than_dataset_returns_all_rows(monkeypatch):
