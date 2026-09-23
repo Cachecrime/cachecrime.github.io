@@ -64,4 +64,5 @@ limit):
 - `minSeverity` — minimum severity on the `Low < Medium < High < Critical` scale
   (case-insensitive); returns incidents at or above this level.
 
-Omitting all filters returns every incident.
+Omitting all filters returns every incident. Raises an error (rather than returning an empty
+list) for `dateFrom` later than `dateTo`, or a `minSeverity` outside the known scale.

@@ -121,6 +121,9 @@ def query_incidents(
         minSeverity: Minimum severity on the Low < Medium < High < Critical scale
             (case-insensitive); returns incidents at or above this level.
     """
+    if dateFrom and dateTo and dateFrom > dateTo:
+        raise RuntimeError(f"dateFrom '{dateFrom}' is later than dateTo '{dateTo}'")
+
     rows = _fetch_rows()
     filtered = [
         row
