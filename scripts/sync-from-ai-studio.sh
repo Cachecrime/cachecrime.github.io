@@ -84,6 +84,13 @@ if [ -d src/assets/images ]; then
   rmdir src/assets 2>/dev/null || true
 fi
 
+# AI Studio exports its own browser-tab title (e.g. "lab. // X-LABS...").
+# Force it back to Cachecrime's title on every sync so it always survives.
+if [ -f index.html ]; then
+  echo "==> Forcing browser-tab title to 'Cache Crime'"
+  sed -i '' 's#<title>.*</title>#<title>Cache Crime</title>#' index.html
+fi
+
 echo "==> Installing dependencies"
 npm install --silent
 
