@@ -11,7 +11,7 @@ import {
   ChevronRight,
   BookOpen,
 } from "lucide-react";
-import { stories, statusValues, type Story } from "../cms/content";
+import { stories, statusValues, allTags, type Story } from "../cms/content";
 
 // Lazy: keeps Leaflet/marked out of the main bundle until a report is opened
 const StoryReader = React.lazy(() => import("../cms/StoryReader"));
@@ -45,6 +45,7 @@ export default function Investigations() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCase, setSelectedCase] = useState<Story | null>(stories[0] ?? null);
   const [filterStatus, setFilterStatus] = useState<string>("ALL");
+  const [filterTag, setFilterTag] = useState<string>("ALL");
   const [readerStory, setReaderStory] = useState<Story | null>(null);
 
   const filteredCases = stories.filter((c) => {
@@ -54,8 +55,9 @@ export default function Investigations() {
       c.id.toLowerCase().includes(q) ||
       c.category.toLowerCase().includes(q) ||
       (c.tags ?? []).some((t) => t.toLowerCase().includes(q));
-    const matchesFilter = filterStatus === "ALL" || c.status === filterStatus;
-    return matchesSearch && matchesFilter;
+    const matchesStatus = filterStatus === "ALL" || c.status === filterStatus;
+    const matchesTag = filterTag === "ALL" || (c.tags ?? []).includes(filterTag);
+    return matchesSearch && matchesStatus && matchesTag;
   });
 
   return (
@@ -118,6 +120,26 @@ export default function Investigations() {
               ))}
             </div>
           </div>
+
+          {/* Tag filter */}
+          {allTags.length > 0 && (
+            <div className="flex gap-1.5 flex-wrap items-center">
+              <span className="font-mono text-[9px] text-gray-400 uppercase tracking-wider mr-1">Topics:</span>
+              {["ALL", ...allTags].map((tg) => (
+                <button
+                  key={tg}
+                  onClick={() => setFilterTag(tg)}
+                  className={`px-2.5 py-1 rounded-full font-mono text-[9px] font-bold tracking-wider uppercase transition-all ${
+                    filterTag === tg
+                      ? "bg-[#FF4A1C] text-white"
+                      : "bg-white border border-black/5 text-gray-500 hover:text-black"
+                  }`}
+                >
+                  {tg === "ALL" ? "ALL" : `#${tg}`}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Case files list */}
           <div className="flex flex-col gap-3">
@@ -270,7 +292,11 @@ export default function Investigations() {
       <AnimatePresence>
         {readerStory && (
           <Suspense fallback={null}>
-            <StoryReader story={readerStory} onClose={() => setReaderStory(null)} />
+            <StoryReader
+              story={readerStory}
+              onClose={() => setReaderStory(null)}
+              onOpenStory={(s) => setReaderStory(s)}
+            />
           </Suspense>
         )}
       </AnimatePresence>

@@ -59,6 +59,36 @@ collections:
       - { name: summary, label: Summary, widget: text, hint: "1–2 sentences shown in the case list" }
       - { name: coverImage, label: Cover image, widget: image, required: false }
       - { name: tags, label: Tags, widget: list, required: false, field: { name: tag, label: Tag, widget: string } }
+      - name: authors
+        label: Authors / byline
+        widget: list
+        required: false
+        summary: "{{fields.name}}"
+        fields:
+          - { name: name, label: Name, widget: string }
+          - { name: role, label: Role, widget: string, required: false, hint: "e.g. OSINT analyst" }
+          - { name: url, label: Profile URL, widget: string, required: false }
+      - { name: updated, label: Last updated, widget: datetime, format: "YYYY-MM-DD", time_format: false, required: false, hint: "Set when a published story is revised" }
+      - { name: featured, label: Feature on top of list, widget: boolean, default: false, required: false }
+      - { name: contentWarning, label: Content warning, widget: text, required: false, hint: "Shown as a banner before the story, if set" }
+      - { name: methodology, label: "Methodology — How we verified this", widget: markdown, required: false, hint: "Methods, tools, and limitations behind the finding" }
+      - name: sources
+        label: Sources & evidence
+        widget: list
+        required: false
+        summary: "{{fields.title}}"
+        fields:
+          - { name: title, label: Title, widget: string }
+          - { name: url, label: URL, widget: string, required: false }
+          - { name: note, label: Note, widget: string, required: false }
+      - name: corrections
+        label: Corrections & updates
+        widget: list
+        required: false
+        summary: "{{fields.date}} — {{fields.note}}"
+        fields:
+          - { name: date, label: Date, widget: datetime, format: "YYYY-MM-DD", time_format: false }
+          - { name: note, label: Note, widget: text }
       - { name: draft, label: Hide from site, widget: boolean, default: false, required: false }
       - name: blocks
         label: Story blocks

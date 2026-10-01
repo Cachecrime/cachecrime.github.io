@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "prompt",
+            "if": "Write(content/**/*.md)|Edit(content/**/*.md)",
+            "prompt": "You are enforcing Editorial & Verification Standards for investigative journalism.\n\nSTANDARDS:\n- Every claim must have a source\n- Weak or missing evidence must be flagged explicitly, never silently skipped\n- Speculation is prohibited\n- Content must be evidence-first and accessible to lay readers\n\nCONTENT TO CHECK:\n$ARGUMENTS\n\nEvaluate whether this content meets the standards. Check:\n1. Does every factual claim have a source?\n2. Is weak evidence flagged rather than presented as strong?\n3. Are there speculative statements presented as fact?\n4. Is unsourced content being written?\n\nIf the content violates standards, return:\n{\n  \"ok\": false,\n  \"permissionDecision\": \"deny\",\n  \"reason\": \"[Specific violations found: list each unsourced claim or weak evidence presented as fact]\"\n}\n\nIf it meets standards or contains no factual claims, return:\n{\n  \"ok\": true,\n  \"permissionDecision\": \"allow\"\n}\n\nIMPORTANT: Flag violations explicitly. Never silently approve weak sourcing.",
+            "model": "claude-sonnet-4-5",
+            "timeout": 30,
+            "statusMessage": "Checking sources and evidence..."
+          }
+        ]
+      }
+    ]
+  }
+}

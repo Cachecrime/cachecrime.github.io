@@ -1,10 +1,16 @@
 {
   "draft": false,
   "coverImage": "/images/kayaks_lake_1783183001508.jpg",
+  "featured": false,
+  "authors": [
+    { "name": "Cachecrime", "role": "OSINT desk" }
+  ],
+  "updated": "2026-10-01",
+  "contentWarning": "This is a sample story used to demonstrate the CMS. Delete it once real investigations are published.",
   "blocks": [
     {
       "type": "text",
-      "body": "This is a **text block**. It supports full Markdown: headings, [links](https://cachecrime.github.io), lists and `inline code`.\n\nUse text blocks for the narrative body of an investigation. Every other block type below can be inserted between text blocks to build an immersive, evidence-first story."
+      "body": "## Overview\n\nThis is a **text block**. It supports full Markdown: headings, [links](https://cachecrime.github.io), lists and `inline code`.\n\nUse text blocks for the narrative body of an investigation. Every other block type below can be inserted between text blocks to build an immersive, evidence-first story."
     },
     {
       "type": "quote",
@@ -72,7 +78,7 @@
     },
     {
       "type": "text",
-      "body": "### Document viewer\n\nThe document block below embeds a PDF uploaded through the CMS media library — use it for source documents, court filings or reports. *(No sample PDF is bundled, so the frame below will 404 until you upload one.)*"
+      "body": "## Document viewer\n\nThe document block below embeds a PDF uploaded through the CMS media library — use it for source documents, court filings or reports. *(No sample PDF is bundled, so the frame below will 404 until you upload one.)*"
     },
     {
       "type": "document",
@@ -81,7 +87,15 @@
       "description": "TODO: upload a real PDF via the CMS and update this path."
     }
   ],
-  "summary": "A demonstration story showing every content block available in the CMS: text, images, before/after comparison, timeline, interactive map, document viewer, video and pull quotes. Delete this once real investigations are published.",
+  "methodology": "This section is where you explain **how a finding was verified** — the tools, the steps, and the limitations. For example: *geolocation confirmed by matching the ridgeline and building shadows against satellite imagery; footage authenticated via reverse image search and metadata; timestamps cross-checked against weather records.* Being explicit here is what separates an investigation from a claim.",
+  "sources": [
+    { "title": "Example satellite imagery provider", "url": "https://www.openstreetmap.org", "note": "Base map / geolocation reference" },
+    { "title": "Sample archived document", "note": "On file with Cachecrime" }
+  ],
+  "corrections": [
+    { "date": "2026-10-01", "note": "Sample correction entry — this is where post-publication updates and fixes are logged for transparency." }
+  ],
+  "summary": "A demonstration story showing every content block available in the CMS: text, images, before/after comparison, timeline, interactive map, document viewer, video and pull quotes — plus the new byline, methodology, sources, corrections, table-of-contents and reading-time features. Delete this once real investigations are published.",
   "date": "2026-07-05",
   "status": "MONITORING",
   "title": "The First Investigation",

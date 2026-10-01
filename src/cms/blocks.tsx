@@ -9,12 +9,28 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./cms.css";
 import type { StoryBlock, TimelineEvent, MapMarker } from "./content";
+import { slugifyHeading } from "./content";
 
 /* ---------- text (markdown) ---------- */
 
+// Inject stable ids onto h2/h3 so the table of contents can anchor-link to them.
+function addHeadingIds(html: string): string {
+  return html.replace(/<(h[23])>([\s\S]*?)<\/\1>/g, (_m, tag, inner) => {
+    const id = slugifyHeading(inner.replace(/<[^>]+>/g, ""));
+    return `<${tag} id="${id}">${inner}</${tag}>`;
+  });
+}
+
+export function Markdown({ body, className = "" }: { body: string; className?: string }) {
+  const raw = marked.parse(body, { async: false }) as string;
+  const html = DOMPurify.sanitize(addHeadingIds(raw), { ADD_ATTR: ["id"] });
+  return (
+    <div className={`story-prose font-sans ${className}`} dangerouslySetInnerHTML={{ __html: html }} />
+  );
+}
+
 function TextBlock({ body }: { body: string }) {
-  const html = DOMPurify.sanitize(marked.parse(body, { async: false }) as string);
-  return <div className="story-prose font-sans" dangerouslySetInnerHTML={{ __html: html }} />;
+  return <Markdown body={body} />;
 }
 
 /* ---------- image ---------- */
