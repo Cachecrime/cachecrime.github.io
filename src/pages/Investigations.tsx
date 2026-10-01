@@ -11,7 +11,7 @@ import {
   ChevronRight,
   BookOpen,
 } from "lucide-react";
-import { stories, statusValues, allTags, type Story } from "../cms/content";
+import { stories, statusValues, allTags, searchStories, type Story } from "../cms/content";
 
 // Lazy: keeps Leaflet/marked out of the main bundle until a report is opened
 const StoryReader = React.lazy(() => import("../cms/StoryReader"));
@@ -48,16 +48,11 @@ export default function Investigations() {
   const [filterTag, setFilterTag] = useState<string>("ALL");
   const [readerStory, setReaderStory] = useState<Story | null>(null);
 
-  const filteredCases = stories.filter((c) => {
-    const q = searchTerm.toLowerCase();
-    const matchesSearch =
-      c.title.toLowerCase().includes(q) ||
-      c.id.toLowerCase().includes(q) ||
-      c.category.toLowerCase().includes(q) ||
-      (c.tags ?? []).some((t) => t.toLowerCase().includes(q));
+  // Full-text search (title, body, evidence, captions…) then status + tag filters
+  const filteredCases = searchStories(searchTerm).filter((c) => {
     const matchesStatus = filterStatus === "ALL" || c.status === filterStatus;
     const matchesTag = filterTag === "ALL" || (c.tags ?? []).includes(filterTag);
-    return matchesSearch && matchesStatus && matchesTag;
+    return matchesStatus && matchesTag;
   });
 
   return (
@@ -80,10 +75,18 @@ export default function Investigations() {
             investigations.
           </h2>
         </div>
-        <p className="font-sans text-gray-500 max-w-sm text-xs md:text-sm leading-relaxed text-left md:text-right">
-          Verified visual investigations and OSINT case files — footage, imagery and
-          documents traced back to their true time and place.
-        </p>
+        <div className="flex flex-col gap-2 md:items-end">
+          <p className="font-sans text-gray-500 max-w-sm text-xs md:text-sm leading-relaxed text-left md:text-right">
+            Verified visual investigations and OSINT case files — footage, imagery and
+            documents traced back to their true time and place.
+          </p>
+          <a
+            href="/tips/"
+            className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#FF4A1C] hover:underline"
+          >
+            Have a tip? Submit securely →
+          </a>
+        </div>
       </div>
 
       {/* Main Workspace */}
@@ -96,7 +99,7 @@ export default function Investigations() {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search case files, IDs, tags..."
+                placeholder="Search investigations — full text, IDs, tags..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 bg-white border border-black/10 rounded-2xl font-sans text-xs focus:outline-none focus:border-[#FF4A1C]/50 transition-colors"

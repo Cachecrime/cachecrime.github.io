@@ -54,6 +54,8 @@ rsync -a --delete \
   --exclude '.env.local' \
   --exclude 'content' \
   --exclude 'public/admin' \
+  --exclude 'public/tips' \
+  --exclude 'public/rss.xml' \
   --exclude 'public/images/uploads' \
   --exclude 'src/cms' \
   --exclude 'src/sections' \
@@ -84,12 +86,10 @@ if [ -d src/assets/images ]; then
   rmdir src/assets 2>/dev/null || true
 fi
 
-# AI Studio exports its own browser-tab title (e.g. "lab. // X-LABS...").
-# Force it back to Cachecrime's title on every sync so it always survives.
-if [ -f index.html ]; then
-  echo "==> Forcing browser-tab title to 'Cache Crime'"
-  sed -i '' 's#<title>.*</title>#<title>Cache Crime</title>#' index.html
-fi
+# AI Studio overwrites index.html — re-apply our <head> customisations
+# (title + RSS autodiscovery + analytics snippet). Idempotent.
+echo "==> Normalising index.html <head>"
+node scripts/fix-index-head.mjs || true
 
 echo "==> Installing dependencies"
 npm install --silent
@@ -98,6 +98,9 @@ npm install --silent
 # re-ensure them (no-op when already present at a matching version)
 npm install --silent leaflet marked dompurify
 npm install --silent -D @types/leaflet
+
+echo "==> Generating RSS feed"
+node scripts/generate-rss.mjs || true
 
 echo "==> Building to verify"
 npm run build

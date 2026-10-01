@@ -24,6 +24,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - run: node scripts/generate-rss.mjs      # writes public/rss.xml
+      - run: node scripts/fix-index-head.mjs     # title + RSS autodiscovery + analytics
       - run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

@@ -174,6 +174,49 @@ export function tableOfContents(story: Story): TocEntry[] {
   return entries;
 }
 
+/* ---------- full-text search ---------- */
+
+/** Flatten a story's searchable text (title, body, evidence, captions…). */
+function storyText(s: Story): string {
+  const parts: string[] = [
+    s.title,
+    s.summary,
+    s.category,
+    s.id,
+    (s.tags ?? []).join(" "),
+    s.methodology ?? "",
+    (s.authors ?? []).map((a) => a.name).join(" "),
+  ];
+  for (const b of s.blocks ?? []) {
+    if (b.type === "text") parts.push(b.body);
+    else if (b.type === "quote") parts.push(b.text, b.attribution ?? "");
+    else if (b.type === "image") parts.push(b.caption ?? "", b.alt ?? "");
+    else if (b.type === "timeline") {
+      parts.push(b.title ?? "");
+      for (const e of b.events) parts.push(e.title, e.body ?? "");
+    } else if (b.type === "map") {
+      parts.push(b.title ?? "", b.caption ?? "");
+      for (const m of b.markers ?? []) parts.push(m.label, m.body ?? "");
+    } else if (b.type === "document") parts.push(b.title, b.description ?? "");
+    else if (b.type === "video") parts.push(b.caption ?? "");
+  }
+  for (const src of s.sources ?? []) parts.push(src.title, src.note ?? "");
+  return parts.join(" ").toLowerCase();
+}
+
+const searchBlobs = new Map<string, string>(stories.map((s) => [s.slug, storyText(s)]));
+
+/** Full-text search across all story content. All terms must match (AND). */
+export function searchStories(query: string): Story[] {
+  const q = query.trim().toLowerCase();
+  if (!q) return stories;
+  const terms = q.split(/\s+/);
+  return stories.filter((s) => {
+    const blob = searchBlobs.get(s.slug) ?? "";
+    return terms.every((t) => blob.includes(t));
+  });
+}
+
 /** Other published stories sharing at least one tag, ranked by overlap then date. */
 export function relatedStories(story: Story, limit = 3): Story[] {
   const tags = new Set(story.tags ?? []);

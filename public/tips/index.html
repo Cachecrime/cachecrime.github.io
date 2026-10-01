@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit a Tip — Cache Crime</title>
+    <meta name="description" content="Share documents, footage or information securely with Cachecrime. Guidance for protecting yourself as a source." />
+    <meta name="robots" content="index,follow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #111010;
+        --paper: #e4e4e4;
+        --muted: #9a9894;
+        --accent: #ff4a1c;
+        --line: rgba(228, 228, 228, 0.12);
+        --card: #1a1918;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        background: var(--ink);
+        color: var(--paper);
+        font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      .wrap { max-width: 44rem; margin: 0 auto; padding: 0 1.25rem; }
+      a { color: var(--accent); }
+      .mono { font-family: "JetBrains Mono", monospace; }
+      .eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+        color: var(--accent); font-weight: 700;
+      }
+      header.top {
+        border-bottom: 1px solid var(--line);
+        padding: 1.1rem 0;
+      }
+      header.top .wrap { display: flex; align-items: center; justify-content: space-between; }
+      .wordmark { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em; color: var(--paper); text-decoration: none; }
+      .back { font-family: "JetBrains Mono", monospace; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; text-decoration: none; color: var(--muted); }
+      .back:hover { color: var(--paper); }
+      .hero { padding: 4.5rem 0 2.5rem; }
+      h1 {
+        font-size: clamp(2.4rem, 7vw, 4rem); line-height: 1.02;
+        letter-spacing: -0.03em; font-weight: 800; margin: 0.8rem 0 1rem;
+      }
+      .lede { font-size: 1.05rem; color: var(--muted); max-width: 34rem; }
+      section { padding: 2rem 0; border-top: 1px solid var(--line); }
+      h2 {
+        font-size: 1.35rem; letter-spacing: -0.01em; font-weight: 700;
+        margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem;
+      }
+      h2 .n { font-family: "JetBrains Mono", monospace; font-size: 0.8rem; color: var(--accent); }
+      p + p { margin-top: 0.8rem; }
+      ul { margin: 0.6rem 0 0 1.1rem; }
+      li { margin-bottom: 0.5rem; color: var(--paper); }
+      .warn {
+        background: rgba(255, 74, 28, 0.08); border: 1px solid rgba(255, 74, 28, 0.35);
+        border-radius: 16px; padding: 1.2rem 1.3rem;
+      }
+      .warn strong { color: var(--accent); }
+      .channels { display: grid; gap: 1rem; margin-top: 0.5rem; }
+      .channel {
+        background: var(--card); border: 1px solid var(--line);
+        border-radius: 16px; padding: 1.3rem;
+      }
+      .channel h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+      .channel .tag {
+        font-family: "JetBrains Mono", monospace; font-size: 0.62rem;
+        letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink);
+        background: var(--accent); padding: 0.15rem 0.5rem; border-radius: 999px;
+        font-weight: 700; margin-left: 0.5rem; vertical-align: middle;
+      }
+      .channel p { color: var(--muted); font-size: 0.92rem; }
+      .channel .val { color: var(--paper); font-family: "JetBrains Mono", monospace; font-size: 0.9rem; word-break: break-all; }
+      .todo { color: #ffb020; font-family: "JetBrains Mono", monospace; font-size: 0.78rem; }
+      footer { border-top: 1px solid var(--line); padding: 2.5rem 0 4rem; color: var(--muted); font-size: 0.82rem; }
+      footer a { color: var(--muted); text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <a class="wordmark" href="/">cachecrime</a>
+        <a class="back" href="/">← Back to site</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <div class="hero">
+          <span class="eyebrow">Secure tips</span>
+          <h1>Share what you know, safely.</h1>
+          <p class="lede">
+            Cachecrime investigates claims about Africa — footage, imagery and
+            documents traced back to their true time and place. If you have
+            something that deserves scrutiny, here is how to reach us without
+            putting yourself at risk.
+          </p>
+        </div>
+
+        <section>
+          <div class="warn">
+            <p>
+              <strong>Before you contact us — protect yourself first.</strong>
+            </p>
+            <ul>
+              <li>Use a <strong>personal device</strong>, not a work or
+                organisation computer or phone — employers can monitor those.</li>
+              <li>Avoid your work or home network if the information is sensitive;
+                consider the <a href="https://www.torproject.org/" rel="noopener" target="_blank">Tor Browser</a>.</li>
+              <li><strong>Plain email and SMS are not anonymous</strong> — they
+                reveal who you are. Use the encrypted options below for anything sensitive.</li>
+              <li>Don't tell colleagues you've contacted us. The fewer people who
+                know, the safer you are.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2><span class="n">01</span> Secure channels</h2>
+          <p style="color: var(--muted)">
+            Choose the most private option you can. Signal is recommended for
+            most people.
+          </p>
+          <div class="channels">
+            <div class="channel">
+              <h3>Signal <span class="tag">Recommended</span></h3>
+              <p>Encrypted messaging and calls. Install Signal, then message us.</p>
+              <p class="val">
+                <!-- TODO (Mike): replace with the real Cachecrime Signal number/username -->
+                <span class="todo">[ADD SIGNAL NUMBER OR USERNAME]</span>
+              </p>
+            </div>
+
+            <div class="channel">
+              <h3>Encrypted email</h3>
+              <p>For documents and longer tips. Use an encrypted provider where possible.</p>
+              <p class="val">
+                <!-- TODO (Mike): replace with the real tip inbox (e.g. a ProtonMail address) -->
+                <span class="todo">[ADD ENCRYPTED EMAIL — e.g. tips@proton.me]</span>
+              </p>
+              <p style="margin-top: 0.5rem">
+                PGP key:
+                <!-- TODO (Mike): link or paste your PGP public key / fingerprint -->
+                <span class="todo">[ADD PGP FINGERPRINT / KEY LINK]</span>
+              </p>
+            </div>
+
+            <div class="channel">
+              <h3>Standard email</h3>
+              <p>
+                Lower sensitivity only — this is <em>not</em> anonymous. For
+                general enquiries or non-sensitive tips.
+              </p>
+              <p class="val">
+                <!-- TODO (Mike): replace with the real public contact address -->
+                <span class="todo">[ADD PUBLIC CONTACT EMAIL]</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2><span class="n">02</span> What makes a strong tip</h2>
+          <ul>
+            <li><strong>Evidence beats assertion.</strong> Documents, photos,
+              videos, screenshots, links, dates and locations are far more useful
+              than a claim on its own.</li>
+            <li><strong>Context.</strong> Tell us what the material is, where it
+              came from, and why it matters.</li>
+            <li><strong>Originals where possible.</strong> Unedited files carry
+              metadata that helps us verify time and place.</li>
+            <li><strong>How to reach you back</strong> (if you're comfortable) —
+              and how you'd like to be credited, or kept anonymous.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2><span class="n">03</span> Our commitment</h2>
+          <p style="color: var(--muted)">
+            We protect our sources. We verify before we publish, and every
+            finding we release carries its verification trail. We will never
+            publish something that identifies you as a source without your
+            consent. If we can't verify a tip, we won't run it — and we'll tell
+            you why if you've asked us to.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        © <span id="y"></span> Cachecrime ·
+        <a href="/">cachecrime.github.io</a> ·
+        <a href="/rss.xml">RSS</a>
+        <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+      </div>
+    </footer>
+  </body>
+</html>
