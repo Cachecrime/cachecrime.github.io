@@ -1,12 +1,8 @@
 {
   "draft": false,
-  "coverImage": "/images/kayaks_lake_1783183001508.jpg",
-  "featured": false,
-  "authors": [
-    { "name": "Cachecrime", "role": "OSINT desk" }
-  ],
-  "updated": "2026-10-01",
   "contentWarning": "This is a sample story used to demonstrate the CMS. Delete it once real investigations are published.",
+  "methodology": "This section is where you explain **how a finding was verified** — the tools, the steps, and the limitations. For example: *geolocation confirmed by matching the ridgeline and building shadows against satellite imagery; footage authenticated via reverse image search and metadata; timestamps cross-checked against weather records.* Being explicit here is what separates an investigation from a claim.",
+  "coverImage": "/images/kayaks_lake_1783183001508.jpg",
   "blocks": [
     {
       "type": "text",
@@ -87,22 +83,39 @@
       "description": "TODO: upload a real PDF via the CMS and update this path."
     }
   ],
-  "methodology": "This section is where you explain **how a finding was verified** — the tools, the steps, and the limitations. For example: *geolocation confirmed by matching the ridgeline and building shadows against satellite imagery; footage authenticated via reverse image search and metadata; timestamps cross-checked against weather records.* Being explicit here is what separates an investigation from a claim.",
-  "sources": [
-    { "title": "Example satellite imagery provider", "url": "https://www.openstreetmap.org", "note": "Base map / geolocation reference" },
-    { "title": "Sample archived document", "note": "On file with Cachecrime" }
-  ],
-  "corrections": [
-    { "date": "2026-10-01", "note": "Sample correction entry — this is where post-publication updates and fixes are logged for transparency." }
-  ],
   "summary": "A demonstration story showing every content block available in the CMS: text, images, before/after comparison, timeline, interactive map, document viewer, video and pull quotes — plus the new byline, methodology, sources, corrections, table-of-contents and reading-time features. Delete this once real investigations are published.",
+  "authors": [
+    {
+      "name": "Mkie",
+      "role": "OSINT desk"
+    }
+  ],
+  "featured": false,
   "date": "2026-07-05",
   "status": "MONITORING",
+  "corrections": [
+    {
+      "date": "2026-10-01",
+      "note": "Sample correction entry — this is where post-publication updates and fixes are logged for transparency."
+    }
+  ],
   "title": "The First Investigation",
+  "sources": [
+    {
+      "title": "Example satellite imagery provider",
+      "url": "https://www.openstreetmap.org",
+      "note": "Base map / geolocation reference"
+    },
+    {
+      "title": "Sample archived document",
+      "note": "On file with Cachecrime"
+    }
+  ],
   "tags": [
     "sample",
     "delete-me"
   ],
+  "updated": "2026-10-01",
   "id": "CC-SAMPLE-001",
   "severity": "LOW",
   "category": "Sample / Documentation"
